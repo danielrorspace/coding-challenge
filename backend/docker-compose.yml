@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  node-app-dev:
+    container_name: node-app-dev
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 2024:2024
+    volumes:
+      - ./:/usr/local/app
+      - /usr/local/app/node_modules
+
+volumes:
+  mongo-data:
